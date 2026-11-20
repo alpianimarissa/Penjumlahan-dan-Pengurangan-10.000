@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Matematika: Soal Cerita Kelas 4 SD</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Fredoka untuk tampilan ramah anak -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Menarik -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti untuk efek perayaan saat menjawab benar -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        skybg: '#E0F2FE',
+                        primary: '#0284C7',
+                        secondary: '#F59E0B',
+                        plus: '#10B981',
+                        minus: '#F43F5E',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F0F9FF;
+            background-image: radial-gradient(#BAE6FD 2px, transparent 2px);
+            background-size: 32px 32px;
+        }
+        .card-shadow {
+            box-shadow: 0 8px 0px rgba(0, 0, 0, 0.08);
+        }
+        .btn-bounce {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .btn-bounce:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.15);
+        }
+        .tab-active {
+            background-color: #0284C7;
+            color: white;
+            box-shadow: 0 4px 0px #0369A1;
+        }
+        .tab-inactive {
+            background-color: white;
+            color: #475569;
+            box-shadow: 0 4px 0px #CBD5E1;
+        }
+        /* Animasi mengambang untuk ikon */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Banner Atas -->
+    <header class="bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 text-white py-6 px-4 shadow-lg rounded-b-3xl relative overflow-hidden">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+            <div class="text-center md:text-left">
+                <span class="inline-block bg-amber-400 text-amber-950 font-display font-bold px-3 py-1 rounded-full text-sm mb-2 shadow-sm">
+                    <i class="fa-solid fa-star mr-1"></i> Matematika Kelas 4 SD
+                </span>
+                <h1 class="font-display text-3xl md:text-4xl font-bold tracking-wide drop-shadow">
+                    Detektif Soal Cerita! 🕵️‍♂️🔍
+                </h1>
+                <p class="text-sky-100 text-base md:text-lg mt-1 font-semibold">
+                    Penjumlahan & Pengurangan Bilangan Cacah hingga 10.000
+                </p>
+            </div>
+            <div class="flex items-center gap-3 bg-white/15 backdrop-blur-sm p-3 rounded-2xl border border-white/20">
+                <div class="text-4xl animate-float">🧮</div>
+                <div class="text-sm">
+                    <p class="font-bold text-amber-300">Misi Hari Ini:</p>
+                    <p class="text-white">Temukan kata kunci & pecahkan kodenya!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigasi Tab Interaktif -->
+    <nav class="max-w-4xl mx-auto w-full px-4 mt-6">
+        <div class="grid grid-cols-3 gap-2 sm:gap-4">
+            <button onclick="switchTab('materi')" id="btn-materi" class="tab-active btn-bounce font-display font-bold py-3 px-2 sm:px-6 rounded-2xl text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>1. Ciri & Kata Kunci</span>
+            </button>
+            <button onclick="switchTab('contoh')" id="btn-contoh" class="tab-inactive btn-bounce font-display font-bold py-3 px-2 sm:px-6 rounded-2xl text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-book-open"></i>
+                <span>2. Contoh Soal</span>
+            </button>
+            <button onclick="switchTab('kuis')" id="btn-kuis" class="tab-inactive btn-bounce font-display font-bold py-3 px-2 sm:px-6 rounded-2xl text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>3. Kuis Latihan</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Konten Utama -->
+    <main class="max-w-5xl mx-auto w-full px-4 py-6 flex-grow">
+
+        <!-- BAGIAN 1: MATERI CIRI-CIRI SOAL CERITA -->
+        <section id="section-materi" class="space-y-6">
+            <!-- Pengantar -->
+            <div class="bg-white rounded-3xl p-6 card-shadow border-2 border-sky-100">
+                <h2 class="font-display text-2xl font-bold text-sky-700 mb-2 flex items-center gap-2">
+                    <span class="bg-sky-100 text-sky-600 p-2 rounded-xl"><i class="fa-solid fa-lightbulb"></i></span>
+                    Bagaimana Cara Menjadi Detektif Soal Cerita?
+                </h2>
+                <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+                    Dalam soal cerita matematika, ada <strong>"Kata Kunci Rahasia"</strong> yang memberi tahu kita apakah soal tersebut harus <strong>DITAMBAH (+)</strong> atau <strong>DIKURANG (-)</strong>. Yuk, pelajari ciri-cirinya di bawah ini!
+                </p>
+            </div>
+
+            <!-- Perbandingan Ciri Penjumlahan vs Pengurangan -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Kartu Penjumlahan -->
+                <div class="bg-emerald-50 rounded-3xl p-6 card-shadow border-2 border-emerald-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-emerald-500 text-white font-display font-bold px-4 py-1.5 rounded-full text-lg shadow-sm">
+                                PENJUMLAHAN ( + )
+                            </span>
+                            <span class="text-3xl bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm font-bold text-emerald-600">+</span>
+                        </div>
+                        <p class="text-emerald-900 font-bold mb-3 text-lg">
+                            Ciri Utama: Jumlah benda menjadi <span class="underline decoration-wavy decoration-emerald-500">SEMAKIN BANYAK</span> atau digabungkan.
+                        </p>
+                        <div class="bg-white rounded-2xl p-4 border border-emerald-200">
+                            <p class="font-bold text-emerald-700 text-sm mb-2 uppercase tracking-wider">🔑 Kata Kunci Rahasia:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Membeli lagi</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Diberi lagi</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Datang lagi</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Jumlah seluruhnya</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Total semuanya</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Digabungkan</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-xl text-sm">Menabung lagi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-emerald-600 text-white p-3 rounded-2xl text-sm flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info text-xl text-emerald-200"></i>
+                        <span><strong>Contoh Kalimat:</strong> "Ibu memanen 2.450 jeruk, lalu memetik <strong>lagi</strong> 1.320 jeruk. Berapa <strong>jumlah seluruh</strong> jeruk Ibu?"</span>
+                    </div>
+                </div>
+
+                <!-- Kartu Pengurangan -->
+                <div class="bg-rose-50 rounded-3xl p-6 card-shadow border-2 border-rose-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-rose-500 text-white font-display font-bold px-4 py-1.5 rounded-full text-lg shadow-sm">
+                                PENGURANGAN ( - )
+                            </span>
+                            <span class="text-3xl bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm font-bold text-rose-600">−</span>
+                        </div>
+                        <p class="text-rose-900 font-bold mb-3 text-lg">
+                            Ciri Utama: Jumlah benda menjadi <span class="underline decoration-wavy decoration-rose-500">SEMAKIN SEDIKIT</span> atau mencari perbedaan.
+                        </p>
+                        <div class="bg-white rounded-2xl p-4 border border-rose-200">
+                            <p class="font-bold text-rose-700 text-sm mb-2 uppercase tracking-wider">🔑 Kata Kunci Rahasia:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Sisa</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Selisih</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Diberikan kepada</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Terjual / Laku</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Busuk / Rusak / Pecah</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Digunakan / Dipakai</span>
+                                <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-xl text-sm">Lebih banyak / sedikit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-rose-600 text-white p-3 rounded-2xl text-sm flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info text-xl text-rose-200"></i>
+                        <span><strong>Contoh Kalimat:</strong> "Pedagang punya 5.400 telur, lalu <strong>terjual</strong> 2.150 telur. Berapa <strong>sisa</strong> telur pedagang?"</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mini Game: Tebak Kata Kunci -->
+            <div class="bg-amber-50 rounded-3xl p-6 card-shadow border-2 border-amber-200">
+                <h3 class="font-display text-xl font-bold text-amber-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
+                    Coba Tes Insting Detektifmu!
+                </h3>
+                <p class="text-amber-900 text-sm mb-4">Klik tombol di bawah untuk menguji apakah kata kunci berikut termasuk <strong>Penjumlahan (+)</strong> atau <strong>Pengurangan (−)</strong>:</p>
+                
+                <div class="bg-white rounded-2xl p-5 border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-center sm:text-left">
+                        <span class="text-xs font-bold uppercase text-slate-400">Kata Kunci Muncul:</span>
+                        <div id="keyword-display" class="font-display text-2xl sm:text-3xl font-bold text-indigo-700 mt-1">
+                            "Berapa selisih kelereng mereka?"
+                        </div>
+                        <p id="keyword-feedback" class="text-sm font-bold mt-2 min-h-[20px]"></p>
+                    </div>
+                    <div class="flex gap-3 shrink-0">
+                        <button onclick="checkKeyword('plus')" class="btn-bounce bg-emerald-500 hover:bg-emerald-600 text-white font-display font-bold py-3 px-5 rounded-2xl shadow-md cursor-pointer">
+                            + Tambah
+                        </button>
+                        <button onclick="checkKeyword('minus')" class="btn-bounce bg-rose-500 hover:bg-rose-600 text-white font-display font-bold py-3 px-5 rounded-2xl shadow-md cursor-pointer">
+                            − Kurang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 2: CONTOH SOAL & PEMBAHASAN -->
+        <section id="section-contoh" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 card-shadow border-2 border-sky-100">
+                <h2 class="font-display text-2xl font-bold text-sky-700 mb-2">
+                    📚 Contoh Soal Cerita & Langkah Penyelesaian
+                </h2>
+                <p class="text-slate-600">
+                    Perhatikan cara menemukan kata kunci yang ditandai warna, lalu klik tombol <strong>"Lihat Cara Menghitung"</strong> untuk melihat cara bersusun pendeknya!
+                </p>
+            </div>
+
+            <!-- Contoh 1: Penjumlahan -->
+            <div class="bg-white rounded-3xl p-6 card-shadow border-l-8 border-emerald-500">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-emerald-100 text-emerald-800 font-display font-bold px-3 py-1 rounded-full text-sm">
+                        Contoh 1 • Penjumlahan dengan Menyimpan
+                    </span>
+                    <span class="text-slate-400 text-sm font-bold"><i class="fa-solid fa-tree text-emerald-500"></i> Tema: Kebun Buah</span>
+                </div>
+                <p class="text-lg text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    Pak Budi memiliki kebun jeruk yang luas. Pada panen pertama, Pak Budi memetik <strong>4.675</strong> buah jeruk. Pada panen kedua, ia memetik <span class="bg-emerald-200 text-emerald-900 font-bold px-1.5 py-0.5 rounded">lagi</span> sebanyak <strong>3.850</strong> buah jeruk. Berapa <span class="bg-emerald-200 text-emerald-900 font-bold px-1.5 py-0.5 rounded">jumlah seluruh</span> jeruk yang dipetik Pak Budi?
+                </p>
+                
+                <div class="mt-4">
+                    <button onclick="toggleSolution('sol-1')" class="btn-bounce bg-sky-500 hover:bg-sky-600 text-white font-display font-bold py-2.5 px-5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-eye"></i> Lihat Cara Menghitung
+                    </button>
+                </div>
+
+                <div id="sol-1" class="hidden mt-4 bg-emerald-50/70 rounded-2xl p-5 border border-emerald-200 space-y-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                        <div class="space-y-2 text-sm sm:text-base">
+                            <p><strong>1. Diketahui:</strong></p>
+                            <ul class="list-disc list-inside text-slate-700 ml-2">
+                                <li>Panen pertama = 4.675 buah</li>
+                                <li>Panen kedua = 3.850 buah</li>
+                            </ul>
+                            <p><strong>2. Kata Kunci:</strong> <span class="text-emerald-700 font-bold">"memetik lagi"</span> dan <span class="text-emerald-700 font-bold">"jumlah seluruh"</span> ➔ Artinya <strong>DITAMBAH (+)</strong>.</p>
+                            <p><strong>3. Kalimat Matematika:</strong> 4.675 + 3.850 = ...</p>
+                        </div>
+                        <!-- Ilustrasi Bersusun -->
+                        <div class="bg-white p-4 rounded-2xl border border-emerald-200 font-mono text-lg max-w-xs mx-auto w-full shadow-sm">
+                            <div class="text-xs text-slate-400 font-sans mb-1 text-center">Cara Bersusun Pendek:</div>
+                            <div class="text-right text-xs text-amber-600 font-bold pr-2">¹  ¹</div>
+                            <div class="text-right tracking-widest pr-2">4.675</div>
+                            <div class="text-right tracking-widest pr-2 border-b-2 border-slate-800 pb-1">+ 3.850</div>
+                            <div class="text-right tracking-widest pr-2 pt-1 font-bold text-emerald-600 text-xl">8.525</div>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-600 text-white p-3 rounded-xl font-bold text-center">
+                        Jadi, jumlah seluruh jeruk yang dipetik Pak Budi adalah 8.525 buah.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh 2: Pengurangan -->
+            <div class="bg-white rounded-3xl p-6 card-shadow border-l-8 border-rose-500">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-rose-100 text-rose-800 font-display font-bold px-3 py-1 rounded-full text-sm">
+                        Contoh 2 • Pengurangan dengan Meminjam
+                    </span>
+                    <span class="text-slate-400 text-sm font-bold"><i class="fa-solid fa-book text-rose-500"></i> Tema: Perpustakaan Sekolah</span>
+                </div>
+                <p class="text-lg text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    Perpustakaan SD Nusantara memiliki koleksi sebanyak <strong>7.420</strong> buku bacaan. Pada hari Senin, sebanyak <strong>2.650</strong> buku <span class="bg-rose-200 text-rose-900 font-bold px-1.5 py-0.5 rounded">dipinjam</span> oleh siswa. Berapa <span class="bg-rose-200 text-rose-900 font-bold px-1.5 py-0.5 rounded">sisa</span> buku yang masih ada di perpustakaan?
+                </p>
+                
+                <div class="mt-4">
+                    <button onclick="toggleSolution('sol-2')" class="btn-bounce bg-sky-500 hover:bg-sky-600 text-white font-display font-bold py-2.5 px-5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-eye"></i> Lihat Cara Menghitung
+                    </button>
+                </div>
+
+                <div id="sol-2" class="hidden mt-4 bg-rose-50/70 rounded-2xl p-5 border border-rose-200 space-y-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                        <div class="space-y-2 text-sm sm:text-base">
+                            <p><strong>1. Diketahui:</strong></p>
+                            <ul class="list-disc list-inside text-slate-700 ml-2">
+                                <li>Total buku awal = 7.420 buku</li>
+                                <li>Buku dipinjam = 2.650 buku</li>
+                            </ul>
+                            <p><strong>2. Kata Kunci:</strong> <span class="text-rose-700 font-bold">"dipinjam"</span> dan <span class="text-rose-700 font-bold">"sisa"</span> ➔ Artinya <strong>DIKURANG (−)</strong>.</p>
+                            <p><strong>3. Kalimat Matematika:</strong> 7.420 − 2.650 = ...</p>
+                        </div>
+                        <!-- Ilustrasi Bersusun -->
+                        <div class="bg-white p-4 rounded-2xl border border-rose-200 font-mono text-lg max-w-xs mx-auto w-full shadow-sm">
+                            <div class="text-xs text-slate-400 font-sans mb-1 text-center">Cara Bersusun Pendek:</div>
+                            <div class="text-right text-xs text-rose-600 font-bold pr-2">⁶ ¹³ ¹²</div>
+                            <div class="text-right tracking-widest pr-2">7.420</div>
+                            <div class="text-right tracking-widest pr-2 border-b-2 border-slate-800 pb-1">− 2.650</div>
+                            <div class="text-right tracking-widest pr-2 pt-1 font-bold text-rose-600 text-xl">4.770</div>
+                        </div>
+                    </div>
+                    <div class="bg-rose-600 text-white p-3 rounded-xl font-bold text-center">
+                        Jadi, sisa buku yang ada di perpustakaan adalah 4.770 buku.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contoh 3: Soal Selisih (Pengurangan) -->
+            <div class="bg-white rounded-3xl p-6 card-shadow border-l-8 border-amber-500">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-100 text-amber-800 font-display font-bold px-3 py-1 rounded-full text-sm">
+                        Contoh 3 • Mencari Selisih (Hati-hati!)
+                    </span>
+                    <span class="text-slate-400 text-sm font-bold"><i class="fa-solid fa-ticket text-amber-500"></i> Tema: Taman Wisata</span>
+                </div>
+                <p class="text-lg text-slate-800 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    Pada hari Sabtu, pengunjung Taman Safari berjumlah <strong>6.850</strong> orang. Pada hari Minggu, pengunjungnya berjumlah <strong>9.200</strong> orang. Berapa <span class="bg-amber-200 text-amber-900 font-bold px-1.5 py-0.5 rounded">selisih</span> pengunjung pada hari Sabtu dan Minggu?
+                </p>
+                
+                <div class="mt-4">
+                    <button onclick="toggleSolution('sol-3')" class="btn-bounce bg-sky-500 hover:bg-sky-600 text-white font-display font-bold py-2.5 px-5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-eye"></i> Lihat Cara Menghitung
+                    </button>
+                </div>
+
+                <div id="sol-3" class="hidden mt-4 bg-amber-50/70 rounded-2xl p-5 border border-amber-200 space-y-3">
+                    <p class="text-sm sm:text-base text-slate-700">
+                        <strong>💡 Ingat Tips Detektif:</strong> Jika ditanya <strong>"SELISIH"</strong>, caranya adalah: <br>
+                        <span class="inline-block bg-white px-3 py-1 rounded-lg font-bold text-amber-800 border border-amber-300 mt-1">Bilangan Besar − Bilangan Kecil</span>
+                    </p>
+                    <div class="bg-white p-4 rounded-2xl border border-amber-200 font-mono text-lg max-w-xs mx-auto w-full shadow-sm">
+                        <div class="text-right tracking-widest pr-2">9.200</div>
+                        <div class="text-right tracking-widest pr-2 border-b-2 border-slate-800 pb-1">− 6.850</div>
+                        <div class="text-right tracking-widest pr-2 pt-1 font-bold text-amber-600 text-xl">2.350</div>
+                    </div>
+                    <div class="bg-amber-600 text-white p-3 rounded-xl font-bold text-center">
+                        Jadi, selisih pengunjung hari Sabtu dan Minggu adalah 2.350 orang.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 3: KUIS INTERAKTIF -->
+        <section id="section-kuis" class="hidden">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 card-shadow border-2 border-indigo-100 max-w-3xl mx-auto">
+                
+                <!-- Header Kuis & Skor -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b-2 border-slate-100">
+                    <div>
+                        <span id="quiz-progress" class="bg-indigo-100 text-indigo-700 font-display font-bold px-3 py-1 rounded-full text-sm">
+                            Soal 1 dari 5
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full font-display font-bold">
+                        <i class="fa-solid fa-star text-amber-500"></i>
+                        <span>Skor: <span id="quiz-score">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Kontainer Pertanyaan Kuis -->
+                <div id="quiz-body" class="mt-6">
+                    <div class="bg-sky-50 rounded-2xl p-5 border border-sky-200 mb-6">
+                        <p id="quiz-question" class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed">
+                            Memuat soal...
+                        </p>
+                    </div>
+
+                    <!-- Tombol Petunjuk Kata Kunci -->
+                    <div class="mb-5">
+                        <button onclick="showHint()" id="btn-hint" class="text-sm font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-200 cursor-pointer">
+                            <i class="fa-solid fa-magnifying-glass"></i> Butuh Petunjuk Kata Kunci?
+                        </button>
+                        <p id="quiz-hint" class="hidden mt-2 text-sm text-amber-800 bg-amber-100/70 p-3 rounded-xl font-semibold">
+                            Petunjuk...
+                        </p>
+                    </div>
+
+                    <!-- Pilihan Jawaban -->
+                    <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Opsi dirender via JS -->
+                    </div>
+
+                    <!-- Area Umpan Balik Jawaban -->
+                    <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-2xl font-semibold text-base">
+                        <!-- Feedback dirender via JS -->
+                    </div>
+
+                    <!-- Tombol Lanjut -->
+                    <div class="mt-6 flex justify-end">
+                        <button id="btn-next-quiz" onclick="nextQuestion()" class="hidden btn-bounce bg-indigo-600 hover:bg-indigo-700 text-white font-display font-bold py-3 px-6 rounded-2xl shadow-md cursor-pointer">
+                            Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Layar Hasil Akhir Kuis -->
+                <div id="quiz-result" class="hidden text-center py-6 space-y-4">
+                    <div id="result-emoji" class="text-6xl animate-bounce">🏆</div>
+                    <h2 class="font-display text-3xl font-bold text-indigo-700">Misi Selesai!</h2>
+                    <p class="text-slate-600 text-lg">Kamu telah menyelesaikan semua tantangan soal cerita!</p>
+                    <div class="bg-indigo-50 border-2 border-indigo-200 rounded-3xl p-6 max-w-sm mx-auto">
+                        <p class="text-sm font-bold text-indigo-500 uppercase">Nilai Akhir Kamu</p>
+                        <p id="final-score" class="font-display text-5xl font-bold text-indigo-700 my-2">100</p>
+                        <p id="result-message" class="text-sm font-bold text-emerald-600">Luar biasa! Kamu Detektif Matematika Hebat!</p>
+                    </div>
+                    <div class="pt-4">
+                        <button onclick="restartQuiz()" class="btn-bounce bg-emerald-500 hover:bg-emerald-600 text-white font-display font-bold py-3 px-8 rounded-2xl text-lg shadow-md cursor-pointer">
+                            <i class="fa-solid fa-rotate-right mr-2"></i> Main Lagi
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-slate-500 text-sm font-semibold">
+        <p>Dibuat khusus untuk belajar Matematika Kelas 4 SD dengan menyenangkan! 🚀✨</p>
+    </footer>
+
+    <!-- Logika Interaktif JavaScript -->
+    <script>
+        // --- 1. NAVIGASI TAB ---
+        function switchTab(tabName) {
+            const tabs = ['materi', 'contoh', 'kuis'];
+            tabs.forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                const btn = document.getElementById(`btn-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.classList.remove('tab-inactive');
+                    btn.classList.add('tab-active');
+                } else {
+                    sec.classList.add('hidden');
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('tab-inactive');
+                }
+            });
+        }
+
+        // --- 2. MINI GAME KATA KUNCI (DI TAB 1) ---
+        const keywordList = [
+            { text: '"Berapa selisih kelereng mereka?"', type: 'minus', reason: 'Benar! Kata "selisih" berarti mencari perbedaan dengan cara DIKURANG (−).' },
+            { text: '"Ibu membeli lagi 1.500 gram gula"', type: 'plus', reason: 'Tepat sekali! Kata "membeli lagi" membuat jumlahnya bertambah (+).' },
+            { text: '"Sebanyak 2.300 telur telah terjual"', type: 'minus', reason: 'Hebat! Kalau "terjual", berarti stok telurnya berkurang (−).' },
+            { text: '"Berapa total pengunjung seluruhnya?"', type: 'plus', reason: 'Mantap! Kata "total seluruhnya" berarti semuanya digabungkan (+).' },
+            { text: '"Sisa uang tabungan Andi sekarang adalah..."', type: 'minus', reason: 'Betul! Kata "sisa" adalah ciri utama soal PENGURANGAN (−).' }
+        ];
+        let currentKeywordIdx = 0;
+
+        function checkKeyword(answer) {
+            const current = keywordList[currentKeywordIdx];
+            const feedbackEl = document.getElementById('keyword-feedback');
+            
+            if (answer === current.type) {
+                feedbackEl.className = "text-sm font-bold mt-2 text-emerald-600";
+                feedbackEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${current.reason}`;
+                
+                // Ganti ke kalimat berikutnya setelah 1.8 detik
+                setTimeout(() => {
+                    currentKeywordIdx = (currentKeywordIdx + 1) % keywordList.length;
+                    document.getElementById('keyword-display').textContent = keywordList[currentKeywordIdx].text;
+                    feedbackEl.textContent = "";
+                }, 1800);
+            } else {
+                feedbackEl.className = "text-sm font-bold mt-2 text-rose-600";
+                feedbackEl.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Ups, coba baca lagi kata kuncinya dengan teliti ya!`;
+            }
+        }
+
+        // --- 3. TOGGLE PEMBAHASAN CONTOH SOAL (DI TAB 2) ---
+        function toggleSolution(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // --- 4. KUIS INTERAKTIF (DI TAB 3) ---
+        const quizData = [
+            {
+                question: "Paman memiliki peternakan ayam. Pada hari Senin ayamnya bertelur sebanyak 3.450 butir. Pada hari Selasa bertelur lagi sebanyak 2.825 butir. Berapa jumlah seluruh telur ayam Paman?",
+                hint: "Perhatikan kata 'bertelur lagi' dan 'jumlah seluruh'. Ini adalah operasi PENJUMLAHAN (3.450 + 2.825).",
+                options: ["6.275 butir", "5.275 butir", "6.375 butir", "1.625 butir"],
+                correct: 0,
+                explanation: "3.450 + 2.825 = 6.275 butir telur."
+            },
+            {
+                question: "Sebuah toko buku memiliki persediaan 8.500 buku tulis. Selama satu minggu, buku tersebut terjual sebanyak 4.750 buku. Berapa sisa buku tulis di toko tersebut?",
+                hint: "Kata kuncinya adalah 'terjual' dan 'sisa'. Gunakan operasi PENGURANGAN (8.500 − 4.750).",
+                options: ["4.250 buku", "3.750 buku", "3.850 buku", "4.750 buku"],
+                correct: 1,
+                explanation: "8.500 − 4.750 = 3.750 sisa buku tulis."
+            },
+            {
+                question: "SD Merdeka mengumpulkan sumbangan untuk korban bencana. Kelas 4A mengumpulkan Rp4.500 dan Kelas 4B mengumpulkan Rp5.250. Berapa total uang sumbangan kedua kelas tersebut?",
+                hint: "Kata kuncinya 'total uang sumbangan kedua kelas', artinya digabungkan dengan PENJUMLAHAN (4.500 + 5.250).",
+                options: ["Rp8.750", "Rp9.250", "Rp9.750", "Rp10.750"],
+                correct: 2,
+                explanation: "4.500 + 5.250 = 9.750 (Rp9.750)."
+            },
+            {
+                question: "Tinggi Gunung Semeru adalah 3.676 meter, sedangkan tinggi Gunung Merapi adalah 2.930 meter. Berapa selisih tinggi kedua gunung tersebut?",
+                hint: "Kata kuncinya adalah 'selisih'. Kurangkan bilangan yang lebih besar dengan yang lebih kecil (3.676 − 2.930).",
+                options: ["746 meter", "846 meter", "1.746 meter", "646 meter"],
+                correct: 0,
+                explanation: "3.676 − 2.930 = 746 meter."
+            },
+            {
+                question: "Pak Tani memanen 5.600 buah semangka. Sebanyak 450 semangka ternyata busuk dan tidak bisa dijual. Berapa semangka Pak Tani yang masih bagus?",
+                hint: "Karena ada semangka yang 'busuk', maka jumlah semangka yang bagus berkurang (5.600 − 450).",
+                options: ["5.250 buah", "5.150 buah", "6.050 buah", "4.150 buah"],
+                correct: 1,
+                explanation: "5.600 − 450 = 5.150 buah semangka yang masih bagus."
+            }
+        ];
+
+        let currentQuizIdx = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuiz() {
+            answered = false;
+            const q = quizData[currentQuizIdx];
+            
+            document.getElementById('quiz-progress').textContent = `Soal ${currentQuizIdx + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-question').textContent = q.question;
+            document.getElementById('quiz-hint').textContent = q.hint;
+            document.getElementById('quiz-hint').classList.add('hidden');
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('btn-next-quiz').classList.add('hidden');
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "btn-bounce text-left p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-sky-300 font-bold text-slate-700 flex items-center gap-3 transition-colors cursor-pointer";
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-xl bg-white border border-slate-300 flex items-center justify-center font-display text-indigo-600 shrink-0">${letters[idx]}</span>
+                    <span class="text-base sm:text-lg">${opt}</span>
+                `;
+                btn.onclick = () => selectAnswer(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function showHint() {
+            document.getElementById('quiz-hint').classList.remove('hidden');
+        }
+
+        function selectAnswer(selectedIdx, btnElement) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuizIdx];
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const allButtons = document.getElementById('quiz-options').children;
+
+            // Nonaktifkan semua tombol
+            for (let b of allButtons) {
+                b.classList.remove('hover:bg-sky-50', 'hover:border-sky-300');
+                b.style.cursor = 'default';
+            }
+
+            if (selectedIdx === q.correct) {
+                score += 20;
+                document.getElementById('quiz-score').textContent = score;
+                btnElement.className = "p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-100 font-bold text-emerald-900 flex items-center gap-3";
+                
+                feedbackEl.className = "mt-6 p-4 rounded-2xl bg-emerald-100 border border-emerald-300 text-emerald-900 font-semibold";
+                feedbackEl.innerHTML = `🎉 <strong>Benar Sekali!</strong> ${q.explanation}`;
+                
+                // Efek Confetti kecil
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+                }
+            } else {
+                btnElement.className = "p-4 rounded-2xl border-2 border-rose-500 bg-rose-100 font-bold text-rose-900 flex items-center gap-3";
+                // Tandai jawaban yang benar
+                allButtons[q.correct].className = "p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 font-bold text-emerald-900 flex items-center gap-3";
+
+                feedbackEl.className = "mt-6 p-4 rounded-2xl bg-rose-100 border border-rose-300 text-rose-900 font-semibold";
+                feedbackEl.innerHTML = `💡 <strong>Kurang Tepat!</strong> Jawaban yang benar adalah <strong>${q.options[q.correct]}</strong>. (${q.explanation})`;
+            }
+
+            feedbackEl.classList.remove('hidden');
+            const nextBtn = document.getElementById('btn-next-quiz');
+            nextBtn.classList.remove('hidden');
+            nextBtn.innerHTML = currentQuizIdx === quizData.length - 1 
+                ? `Lihat Hasil Akhir <i class="fa-solid fa-trophy ml-1"></i>` 
+                : `Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>`;
+        }
+
+        function nextQuestion() {
+            currentQuizIdx++;
+            if (currentQuizIdx < quizData.length) {
+                loadQuiz();
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            document.getElementById('quiz-body').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('final-score').textContent = score;
+
+            const msgEl = document.getElementById('result-message');
+            const emojiEl = document.getElementById('result-emoji');
+
+            if (score === 100) {
+                emojiEl.textContent = "🏆";
+                msgEl.textContent = "Sempurna! Kamu Detektif Matematika Bintang 5!";
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+                }
+            } else if (score >= 60) {
+                emojiEl.textContent = "🌟";
+                msgEl.textContent = "Hebat! Terus berlatih agar semakin teliti ya!";
+            } else {
+                emojiEl.textContent = "💪";
+                msgEl.textContent = "Jangan menyerah! Yuk baca lagi Kata Kunci di Tab 1 dan coba lagi!";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuizIdx = 0;
+            score = 0;
+            document.getElementById('quiz-score').textContent = "0";
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-body').classList.remove('hidden');
+            loadQuiz();
+        }
+
+        // Inisialisasi kuis saat halaman dimuat
+        window.onload = function() {
+            loadQuiz();
+        };
+    </script>
+</body>
+</html>
